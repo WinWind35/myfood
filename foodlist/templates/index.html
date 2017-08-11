@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>每周菜单-by WinWind</title>
+    </head>
+    <body>
+        <h3><a href="/admin/">管理菜单</a> </h3>
+        <ul>
+        {% for food in menu %}
+            <li>{{ food.name }} - {{ food.get_cooker_display }}</li>
+        {% endfor %}
+        </ul>
+        <hr/>
+        <form action="/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="加菜" />
+        </form>
+        <hr/>
+        <a href="/foodlist/"> <input type="button" value="生成菜单"></a>
+        <table border=4 width=300 align=center>
+            <caption>本周菜单</caption>
+            <tr bgcolor="#cccccc">
+                <th width="30"><br></th>
+                <th>素菜</th>
+                <th>荤菜</th>
+                <th>饭后工作</th>
+            </tr>
+            {% for list in food_list %}
+             <tr align=center>
+                  <td>{{ list.week }}</td>
+                  <td>{{ list.su }} - {{ list.cooksu }}</td>
+                  <td>{{ list.hun }} - {{ list.cookhun }}</td>
+                  <td>{{ list.clean }}</td>
+             </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
